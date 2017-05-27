@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+  <render>
+    <seed>123</seed>
+    
+    <width>1280</width>
+    <height>720</height>
+    
+    <camPos>0 0 5</camPos>
+    <camDir>0 0 -1</camDir>
+    <fov>60</fov>
+    
+    <out>images/image.bmp</out>
+  </render>
+  
+  <objects>
+    <!-- Ground -->
+    <sphere>
+      <position>0 -1002 0</position>
+      <radius>1000</radius>
+      <material>0</material>
+    </sphere>
+    
+    <sphere>
+      <position>2 0 0</position>
+      <radius>1</radius>
+      <material>2</material>
+    </sphere>
+    <sphere>
+      <position>-2 1 0</position>
+      <radius>2</radius>
+      <material>1</material>
+    </sphere>
+  </objects>
+
+  <materials>
+    <phong>
+      <color>.8 .8 1</color>
+      <ambient>0.01</ambient>
+      <diffuse>1</diffuse>
+      <specular>0</specular>
+      <specularExp>32</specularExp>
+    </phong>
+    <phong>
+      <color>.2 1 .5</color>
+      <ambient>0.01</ambient>
+      <diffuse>1</diffuse>
+      <specular>1</specular>
+      <specularExp>32</specularExp>
+    </phong>
+    <glossy>
+      <color>1 0.5 0.3</color>
+    </glossy>
+  </materials>
+  
+  <lights>
+    <point>
+      <position>3 5 -2</position>
+      <color>1 1 1</color>
+      <intensity>0.3</intensity>
+    </point>
+    <point>
+      <position>-5 5 5</position>
+      <color>1 1 1</color>
+      <intensity>0.3</intensity>
+    </point>
+  </lights>
+</config>
