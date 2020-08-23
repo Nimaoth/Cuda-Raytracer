@@ -37,10 +37,10 @@ __global__ void convertImage(RenderData* data, byte* pixels)
 	size_t index = x + y * data->width;
 	size_t offset = index * 3;
 
-	Pixel& pixel = data->pixels[index];
-	pixels[offset + 0] = (byte)mapAndClamp<float>(pixel.b, 0, 1, 0, 255);
-	pixels[offset + 1] = (byte)mapAndClamp<float>(pixel.g, 0, 1, 0, 255);
-	pixels[offset + 2] = (byte)mapAndClamp<float>(pixel.r, 0, 1, 0, 255);
+	Vec3& pixel = data->pixels[index];
+	pixels[offset + 0] = (byte)mapAndClamp<float>(pixel.z, 0, 1, 0, 255);
+	pixels[offset + 1] = (byte)mapAndClamp<float>(pixel.y, 0, 1, 0, 255);
+	pixels[offset + 2] = (byte)mapAndClamp<float>(pixel.x, 0, 1, 0, 255);
 }
 
 unsigned int getBlockCount(unsigned int total, unsigned int threads)
@@ -86,7 +86,7 @@ void asdf(int argc, char** argv)
 	renderData.aspectRatio = (float)renderData.width / (float)renderData.height;
 
 	// pixels array
-	DeviceArray<Pixel> d_pixels(renderData.width * renderData.height);
+	DeviceArray<Vec3> d_pixels(renderData.width * renderData.height);
 	renderData.pixels = d_pixels.GetRaw();
 
 	// objects
@@ -118,13 +118,13 @@ void asdf(int argc, char** argv)
 
 	// raytrace
 	Log("Raytracing...");
-	raytrace << <blocks, threads >> >(d_renderData.GetRaw());
+	raytrace<<<blocks, threads>>>(d_renderData.GetRaw());
 	cudaDeviceSynchronize();
 
 	// create bitmap and convert from float[] to byte[]
 	Log("Converting image data...");
 	DeviceArray<byte> d_bytePixelData(renderData.width * renderData.height * 3);
-	convertImage << <blocks, threads >> >(d_renderData.GetRaw(), d_bytePixelData.GetRaw());
+	convertImage<<<blocks, threads>>>(d_renderData.GetRaw(), d_bytePixelData.GetRaw());
 	cudaDeviceSynchronize();
 
 	// save image

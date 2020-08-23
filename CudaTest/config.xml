@@ -10,7 +10,7 @@
     <camDir>0 0 -1</camDir>
     <fov>60</fov>
     
-    <out>images/image.bmp</out>
+    <out>images/example1.bmp</out>
   </render>
   
   <objects>

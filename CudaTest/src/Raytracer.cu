@@ -2,8 +2,6 @@
 #include "CudaUtils.h"
 #include "Vec3.cuh"
 
-#include <helper_math.h>
-
 #define MAX_RECURSION_DEPTH 2
 
 struct HitInfo
@@ -223,17 +221,12 @@ __global__ void raytrace(RenderData* data)
 	{
 		Vec3 color = calculateColor(0, data, ray, &hit);
 
-		Pixel& pixel = data->pixels[index];
-		pixel.r = color.x;
-		pixel.g = color.y;
-		pixel.b = color.z;
+		data->pixels[index] = color;
 	}
 	else
 	{
 
-		Pixel& pixel = data->pixels[index];
-		pixel.r = data->backgroundColor.x;
-		pixel.g = data->backgroundColor.y;
-		pixel.b = data->backgroundColor.z;
+		data->pixels[index] = data->backgroundColor;
 	}
+
 }

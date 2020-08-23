@@ -2,6 +2,7 @@
 
 #include "Raytracer.cuh"
 #include <vector>
+#include <string>
 #include "Log.h"
 
 #define TRY(x) { try { x; } catch (std::exception& e) { LogError(e.what()); }}

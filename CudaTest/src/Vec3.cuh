@@ -25,7 +25,9 @@ __device__ Vec3 operator *(const Vec3& a, const Vec3& b);
 __device__ Vec3 operator *(const Vec3& v, float f);
 __device__ Vec3& operator *=(Vec3& v, float f);
 __device__ Vec3 operator +(const Vec3& a, const Vec3& b);
+__device__ Vec3 operator +(const Vec3& a, float f);
 __device__ Vec3& operator +=(Vec3& a, const Vec3& b);
 __device__ Vec3 operator -(const Vec3& a, const Vec3& b);
 __device__ Vec3& operator -=(Vec3& a, const Vec3& b);
 __device__ Vec3 operator -(const Vec3& a);
+

@@ -106,6 +106,11 @@ __device__ Vec3 operator+(const Vec3& a, const Vec3& b)
 	};
 }
 
+__device__ Vec3 operator+(const Vec3& a, float f)
+{
+	return Vec3(a.x + f, a.y + f, a.z + f);
+}
+
 __device__ Vec3 & operator+=(Vec3 & a, const Vec3 & b)
 {
 	a.x += b.x;

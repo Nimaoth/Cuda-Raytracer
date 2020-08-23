@@ -26,13 +26,13 @@
     <RootNamespace>CudaTest</RootNamespace>
     <ProjectName>CudaTest</ProjectName>
     <CudaToolkitCustomDir />
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup>
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -42,7 +42,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
-    <Import Project="$(CUDAPropsPath)\CUDA 8.0.props" />
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 11.0.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets">
     <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
@@ -63,16 +63,17 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\CppLibraries\rapidxml\rapidxml-1.13;$(CudaToolkitDir)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\dev\libs\rapidxml-1.13;$(CUDA_PATH)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalDependencies>cudart_static.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(CudaToolkitLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(CUDA_PATH)/lib/x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <OutputFile>$(OutDir)/$(ProjectName).exe</OutputFile>
     </Link>
     <CudaCompile>
-      <CodeGeneration>compute_30,sm_30;compute_35,sm_35;compute_37,sm_37;compute_50,sm_50;compute_52,sm_52;compute_60,sm_60;</CodeGeneration>
+      <CodeGeneration>
+      </CodeGeneration>
       <AdditionalOptions>-Xcompiler "/wd 4819" -Wno-deprecated-gpu-targets %(AdditionalOptions)</AdditionalOptions>
       <Include>C:\ProgramData\NVIDIA Corporation\CUDA Samples\v8.0\common\inc</Include>
       <Defines>WIN32</Defines>
@@ -125,31 +126,28 @@
     </CudaCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\ConfigLoader.cpp" />
-    <ClCompile Include="src\Log.cpp" />
-    <ClCompile Include="src\Bitmap.cpp" />
-    <ClCompile Include="src\CudaUtils.cpp" />
-    <ClCompile Include="src\Objects.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\ConfigLoader.h" />
-    <ClInclude Include="src\Log.h" />
-    <ClInclude Include="src\Bitmap.h" />
-    <ClInclude Include="src\CudaUtils.h" />
-    <ClInclude Include="src\Objects.h" />
-    <ClInclude Include="src\Raytracer.cuh" />
-    <ClInclude Include="src\Vec3.cuh" />
-  </ItemGroup>
-  <ItemGroup>
-    <Xml Include="config.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <CudaCompile Include="src\main.cu" />
     <CudaCompile Include="src\Raytracer.cu" />
     <CudaCompile Include="src\Vec3.cu" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Bitmap.cpp" />
+    <ClCompile Include="src\ConfigLoader.cpp" />
+    <ClCompile Include="src\CudaUtils.cpp" />
+    <ClCompile Include="src\Log.cpp" />
+    <ClCompile Include="src\Objects.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Bitmap.h" />
+    <ClInclude Include="src\ConfigLoader.h" />
+    <ClInclude Include="src\CudaUtils.h" />
+    <ClInclude Include="src\Log.h" />
+    <ClInclude Include="src\Objects.h" />
+    <ClInclude Include="src\Raytracer.cuh" />
+    <ClInclude Include="src\Vec3.cuh" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="$(CUDAPropsPath)\CUDA 8.0.targets" />
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 11.0.targets" />
   </ImportGroup>
 </Project>
